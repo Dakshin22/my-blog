@@ -6,7 +6,8 @@ const ArticlesList = ({ articles }) => (
       <Link
         className="article-list-item"
         key={key}
-        to={`article/${article.name}`}
+        to={`/article/${article.name}`}
+        replace
       >
           {console.log(article.name)}
         <h3>{article.title}</h3>
