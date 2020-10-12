@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-const AddCommentForm = () => {
+const AddCommentForm = ({ articleName, setArticleInfo }) => {
   const [username, setUsername] = useState("");
   const [commentText, setCommentText] = useState("");
 
-  const addComment = async ({articleName, setArticleInfo}) => {
+  const addComment = async () => {
     const result = await fetch(`/api/articles/${articleName}/add-comment`, {
       method: "post",
       //stringify converts object into JSON string, which is needed for the server
@@ -12,8 +12,8 @@ const AddCommentForm = () => {
         text: commentText,
       }),
       headers: {
-          'Content-Type': 'application/json',
-      }
+        "Content-Type": "application/json",
+      },
     });
     const body = await result.json();
     setArticleInfo(body);
@@ -25,7 +25,7 @@ const AddCommentForm = () => {
         Name:
         <input
           type="text"
-          value={userName}
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
       </label>
@@ -38,7 +38,7 @@ const AddCommentForm = () => {
         />
       </label>
 
-      <button onClick = {()=>addComment()}>Add Comment</button>
+      <button onClick={() => addComment()}>Add Comment</button>
     </div>
   );
 };
